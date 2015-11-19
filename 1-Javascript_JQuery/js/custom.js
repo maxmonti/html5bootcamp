@@ -22,7 +22,10 @@ $("#ajax-button").click(function(){
 					$(" #hidden-section-h1 ").text(result.response).css("color", "inherit")
 					).done(
 						setTimeout(function(){
-							$(" #hidden-section-h1 ").append( "<a class='highlight'> delayed highlight </a>" )
+							string = $(" #hidden-section-h1 ").text()
+							string = string.replace("yourname!", "")
+							$(" #hidden-section-h1 ").text(string)
+							$(" #hidden-section-h1 ").append( "<a class='highlight'>yourname!</a>" )
 									}, 1000)
 						
 										
