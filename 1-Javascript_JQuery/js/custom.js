@@ -18,8 +18,18 @@ $("#ajax-button").click(function(){
     
 		{url: "http://bootcamp.aws.af.cm/welcome/yourname", success: 
 			function(result){
-				$(" #hidden-section-h1 ").text(result.response);
-				$(" #hidden-section-h1 ").css("color", "inherit");
+				$.when(
+					$(" #hidden-section-h1 ").text(result.response).css("color", "inherit")
+					).done(
+						setTimeout(function(){
+							$(" #hidden-section-h1 ").append( "<a class='highlight'> delayed highlight </a>" )
+									}, 1000)
+						
+										
+					);
+				
+				
+				
 								}, 
 		error: function(){
 			$(" #hidden-section-h1 ").css("color", "red");
