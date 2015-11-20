@@ -42,20 +42,20 @@ $("#ajax-button").click(function(){
 		
 		});
 }); 
-
-$( document ).ready( fadeInSection );
-
-
-
-
 $.ajax(
 	{url:"https://api.spotify.com/v1/search?q=rolling+stones&type=album", success:
 		function(result){
-			$("#ehh").val(result)
-			
+			$("#ajax-content").val(result)
+			$("#sidebar").html('<img src="' + $("#ajax-content").val().albums.items[0].images[0].url + '" />');
 			
 			}
 		}
 
 
 );
+$( document ).ready( fadeInSection );
+
+
+
+
+
