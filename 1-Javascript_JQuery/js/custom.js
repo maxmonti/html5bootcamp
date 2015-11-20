@@ -45,3 +45,15 @@ $("#ajax-button").click(function(){
 
 $( document ).ready( fadeInSection );
 
+
+$.ajax(
+	{url:"https://api.spotify.com/v1/search?q=rolling+stones&type=album", success:
+		function(result){
+			$("#ehh").val(result)
+			
+			
+			}
+		}
+
+
+);
