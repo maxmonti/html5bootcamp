@@ -54,12 +54,15 @@ $.ajax(
 			
 			$("#ajax-content").val(data) //Para pruebas
 			
-			alert(data.albums.items.length)
 			$(data.albums.items).each(function(){
+				$("#sidebar").append('<article  class="rs-album">')	
+					
+				})
+				$("article.rs-album").each(function(index){
+					$(this).append('<img src="' + data.albums.items[index].images[0].url + '" />')
+					});
 				
-					$("#sidebar").append('<img src="' + data.albums.items[0].images[0].url + '" />');
-				}
-			)
+			
 			
 		}
 	}
