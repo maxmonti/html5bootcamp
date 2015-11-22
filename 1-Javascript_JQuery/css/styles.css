@@ -243,7 +243,7 @@ Wide styles
 	.main
 	{
 		float: left;
-		width: 65%;
+		width: 55%;
 		margin-right: 5%;
 		margin-bottom: 1em;
 	}
@@ -251,7 +251,7 @@ Wide styles
 	.aside
 	{
 		float: left;
-		width: 30%;
+		width: 40%;
 		/*margin-bottom: 1em;*/
 	}
 
