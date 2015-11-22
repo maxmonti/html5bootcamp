@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/bootstrap.css">
         <script src="js/jquery-2.1.4.js"></script>
+        <script src="js/custom.js"></script>
         
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
@@ -35,32 +36,37 @@
 					  <label for="inputFirstName" class="col-lg-2 control-label">First name</label>
 					  <div class="col-lg-10">
 						<input class="form-control" id="inputFirstName" placeholder="First name" type="text">
+						<label id="errorFirstName" style="color: red"></label>
 					  </div>
 					</div>
 					<div class="form-group">
 					  <label for="inputLastName" class="col-lg-2 control-label">Last name</label>
 					  <div class="col-lg-10">
 						<input class="form-control" id="inputLastName" placeholder="Last name" type="text">
+						<label id="errorLastName" style="color: red"></label>
 					  </div>
 					</div>
 					<div class="form-group">
 					  <label for="inputEmail" class="col-lg-2 control-label">Email</label>
 					  <div class="col-lg-10">
 						<input class="form-control" id="inputEmail" placeholder="Email" type="text">
+						<label id="errorEmail" style="color: red"></label>
 					  </div>
 					</div>
 					<div class="form-group">
 					  <label for="inputBirthday" class="col-lg-2 control-label">Birthday</label>
 					  <div class="col-lg-10">
 						<input class="form-control" id="inputBirthday" placeholder="Enter your birth date" type="text">
+						<label id="errorBirthday" style="color: red"></label>
 					  </div>
 					</div>
 					<div class="form-group">
 					  <label for="userBio" class="col-lg-2 control-label">Biography</label>
 					  <div class="col-lg-10">
 						<textarea class="form-control" rows="3" id="textArea"></textarea>
-						
+						<label id="errorArea" style="color: red"></label>
 					  </div>
+					  
 					</div>
 					<div class="form-group">
 					  <label for="favoriteSport" class="col-lg-2 control-label">Favorite sport</label>
@@ -75,13 +81,14 @@
 							
 						
 					  </div>
+					  <label id="errorFavoriteSport" style="color: red"></label>
 					</div>
 					
 					 
 					<div class="form-group">
 					  <div class="col-lg-10 col-lg-offset-2">
 						<button type="reset" class="btn btn-default">Clear</button>
-						<button type="submit" class="btn btn-primary">Submit</button>
+						<a  id="submit-btn" class="btn btn-primary" onClick="validateFields()">Submit</a>
 					  </div>
 					</div>
 				  </fieldset>
