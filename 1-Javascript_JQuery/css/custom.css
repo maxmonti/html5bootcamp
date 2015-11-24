@@ -12,3 +12,21 @@ img {
 article {
     border-style: solid;
 } 
+
+#hidden-section  {
+	display: none;
+	}
+	
+#ajax-content {
+	display: none;
+	}
+	
+#texta {
+	color: black; 
+	font-size: 200%;
+	}
+	
+	
+#album-query {
+	font-size: 18px;
+	}
