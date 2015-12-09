@@ -1,0 +1,29 @@
+* {
+    font:300 13px/1.4'Helvetica Neue', Helvetica, Arial;
+}
+.inbox {
+    padding:15px;
+}
+ul {
+    list-style:none;
+    padding:0;
+}
+ul li {
+    padding:15px;
+    overflow:hidden;
+    background:#f9f9f9;
+    border-top:1px solid #e5e5e5;
+}
+ul li:last-child {
+    border-bottom:1px solid #e5e5e5;
+}
+
+input {
+    display: block;
+    box-sizing: border-box;
+
+}
+input.long{
+	width: 100%;
+	
+}

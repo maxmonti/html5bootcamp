@@ -1,0 +1,74 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>My favorite movies</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        
+        <!-- Place favicon.ico in the root directory -->
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/style.css">
+   
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <div ng-app="moviesApp">
+    
+            <div ng-controller="MoviesCtrl">
+                <h1>Add, remove or edit list of movies</h1>    
+                    
+                    <!-- Main controller for adding, removing, editing movies -->
+                    <ul>
+                        <li ng-repeat="movie in movies track by $index"><!-- track by $index makes sure Angulars doesnt throw an error on ng-repeat. This happens because of the empty movie being added at the end not having an unique identifier. we tell Angular to use the index as an identifier-->
+                            <input type="text" placeholder="Enter name of movie" ng-model="movie.name" ng-change="updateLocalStorage()"> 
+                            <input type="text" class="long" placeholder="Enter description" ng-model="movie.description" ng-change="updateLocalStorage()">
+                            <input type="text"  placeholder="Enter year" ng-model="movie.year" ng-change="updateLocalStorage()"> 
+                            <button ng-click="deleteMovie($index)">Delete movie</button>
+                            <!-- Local storage updated on every event (edit, remove and add)-->    
+                        </li>
+                    </ul>
+
+                    <ul>
+
+                    </ul>
+                    <button ng-click="addMovie()">Add movie</button><!-- adds an empty movie at th end. -->
+
+
+
+                    
+
+                           
+            </div>
+            
+            <h1> Movies view </h1>
+            <!-- Separate view with list of movies with details. Also used to show how changes above are automatically updated -->
+            <div ng-controller="MoviesList">
+                 <ul>
+                        <li ng-repeat="movie in movies">
+                            <p>Name: {{ movie.name }}</p>
+                            <p>Details: {{movie.description }}</p>
+                            <p>Release date: {{ movie.year }}</p>                          
+                        </li>
+                 </ul>
+            </div>
+
+        </div>
+
+
+
+        <script type="text/javascript" src="js/angular.js"></script>
+        <script type="text/javascript" src="js/custom.js"></script>
+
+
+    </body>
+    
+    
+    
+</html>
