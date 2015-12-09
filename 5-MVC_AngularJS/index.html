@@ -19,7 +19,7 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <div ng-app="moviesApp">
+        <div class="centerdiv" ng-app="moviesApp">
     
             <div ng-controller="MoviesCtrl">
                 <h1>Add, remove or edit list of movies</h1>    
@@ -27,8 +27,11 @@
                     <!-- Main controller for adding, removing, editing movies -->
                     <ul>
                         <li ng-repeat="movie in movies track by $index"><!-- track by $index makes sure Angulars doesnt throw an error on ng-repeat. This happens because of the empty movie being added at the end not having an unique identifier. we tell Angular to use the index as an identifier-->
+                            <label for="name">Name:</label>
                             <input type="text" placeholder="Enter name of movie" ng-model="movie.name" ng-change="updateLocalStorage()"> 
-                            <input type="text" class="long" placeholder="Enter description" ng-model="movie.description" ng-change="updateLocalStorage()">
+                            <label for="description">Description:</label>
+                            <textarea rows="3" cols="100" placeholder="Enter description" ng-model="movie.description" ng-change="updateLocalStorage()"></textarea>
+                            <label for="year">Year</label>
                             <input type="text"  placeholder="Enter year" ng-model="movie.year" ng-change="updateLocalStorage()"> 
                             <button ng-click="deleteMovie($index)">Delete movie</button>
                             <!-- Local storage updated on every event (edit, remove and add)-->    

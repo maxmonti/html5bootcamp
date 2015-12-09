@@ -18,7 +18,7 @@ ul li:last-child {
     border-bottom:1px solid #e5e5e5;
 }
 
-input {
+input,textarea  {
     display: block;
     box-sizing: border-box;
 
@@ -26,4 +26,11 @@ input {
 input.long{
 	width: 100%;
 	
+}
+
+.centerdiv{
+
+
+    width: 60%;
+    margin: 0 auto;   
 }
