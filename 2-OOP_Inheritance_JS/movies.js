@@ -161,11 +161,13 @@ DownloadableMovie.prototype.download = function () {
 //Social mixin to extend the functionality of Movie
 var Social = function() {
 	this.share = function(friendName) {
-	  console.log("Sharing " + this.get('title') + " with " + friendName)
-	};
+		console.log("Sharing " + this.get('title') + " with " + friendName)
+		};
+		
 	this.like = function() {
-	console.log("You liked " + this.get('title'))
-	};
+		console.log("You liked " + this.get('title'))
+		};
+		
 	return this;
 };
 
@@ -217,7 +219,7 @@ Movie.prototype.getListOfActors = function() {
 Movie.prototype.printListOfActors = function() {
 	console.log('List of actors: ');
 	for (i = 0; i < this.getListOfActors().length; i++) {
-    console.log(this.getActor(i).get('name'));
+		console.log(this.getActor(i).get('name'));
 		}
 	}
 	
