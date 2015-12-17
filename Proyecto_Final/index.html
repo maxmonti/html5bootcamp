@@ -10,22 +10,8 @@
     <link rel="stylesheet" href="css/custom.css">
     <link rel="stylesheet" href="css/fontello.css">
     <link rel="stylesheet" href="css/animation.css">
-    
-
     <!--[if IE 7]><link rel="stylesheet" href="css/fontello-ie7.css"><![endif]-->
 
-    <!--<script>
-      function toggleCodes(on) {
-        var obj = document.getElementById('icons');
-        
-        if (on) {
-          obj.className += ' codesOn';
-        } else {
-          obj.className = obj.className.replace(' codesOn', '');
-        }
-      }
-      
-    </script>-->
 </head>
 
 <body>
@@ -33,21 +19,29 @@
 
     <div ng-app="weatherApp">
 
+        <div ng-controller="AdvSearch">        
+           <select ng-options="province as province.name for province in provinces" ng-change="listOfCities(Provinces.woeid)" ng-model="Provinces">
+           </select>
+           <select ng-options="city as city.name for city in cities" ng-model="Cities">
+           </select>
+
+           <button ng-mouseover="count = count + 1" ng-init="count=0" name="add-widget-btn-adv" ng-click="addWidget(Cities.woeid)">Add weather widget from dropdown {{count}}</button>
+
+        </div> 
+
+
+
+
         <div id="adder" ng-controller="MainCtrl">
             
-
-
-    		<input list="cityList" type="" ng-model="SelectedCity" ng-change="updateQuery(SelectedCity)" placeholder="Seach for City in Argentina"/>
+    		<input list="cityList" ng-model="SelectedCity" ng-change="updateQuery(SelectedCity)" placeholder="Seach for City in Argentina"/>
     		<datalist id="cityList">
     			<option value="{{ city_query.name  + ', '  + city_query.admin1.content }}">
     		</datalist>
 
-                 
-                
 
-                <button name="add-widget-btn" ng-click="addWidget(SelectedCity)">Add weather widget</button>
-
-               
+            <button name="add-widget-btn" ng-click="addWidget(SelectedCity)">Add weather widget</button>
+       
 
 
         </div>
@@ -57,26 +51,22 @@
 
 
         <div ng-controller="WidgetsList">
-            <div class="maincage commonwidth themecolor" ng-repeat="widget in widgets track by $index">
+
+            <div ng-mouseover="showCloseButton($index)" id="cage{{$index}}" class="maincage commonwidth themecolor" ng-repeat="widget in widgets track by $index" >
                 <div class="bgimagecage commonwidth">
                     <div class="locationselect">
-                        <div class="cityname">{{ widget.location.city + ', ' + widget.location.country }}    <i ng-click="deleteWidget($index)" class="icon-cancel"></i></div>
+                        <div class="cityname">{{ widget.location.city + ', ' + widget.location.country}}    <i id="delete{{$index}}" ng-click="deleteWidget($index)" class="icon-cancel hidden-delete"></i></div>
                     </div>
 
-                    <span class="tempvalue"><i class="icon-rain centericon k-widget"></i></span>
+                    <span class="tempvalue"><i class="{{codeToIcon(widget.item.condition.code)}} centericon k-widget"></i></span>
                     <span class="date">{{widget.lastBuildDate}}</span>
 
                     <div class="todayweather">
                         <div class="todayweatherinner">
-                    		<span class="todayweathertxtfirst">{{widget.item.condition.text}}<b> | </b>{{widget.item.condition.temp + 'º C'}}<b> | 
-                               </b>     <span class="smallFont">Wind direction: {{widget.wind.direction}}</span>
+                    		<span class="todayweathertxtfirst">&nbsp{{widget.item.condition.text}}<b> | </b>{{widget.item.condition.temp + 'º C'}}<b> |</b>
+                           </span>
 
-
-                           
-
-                            </span>
-
-                    		<span class="todayweathertxtsecond">Humidity : {{widget.atmosphere.humidity}}%<br>Wind speed :  {{widget.wind.speed + " " + widget.units.speed}} <br> Pressure: {{widget.atmosphere.pressure + ' ' + widget.units.pressure}}</span>
+                    		<span class="todayweathertxtsecond">Humidity : {{widget.atmosphere.humidity}}%<br>Wind: {{widget.wind.speed + " " + widget.units.speed + ' ' + widget.wind.direction + 'º' }} <br> Pressure: {{widget.atmosphere.pressure + ' ' + widget.units.pressure}}</span>
 
                         </div>
                 	</div>
@@ -86,7 +76,7 @@
                             <div class="daycol">
                                 {{ widget.item.forecast[0].day }}<br />
                                 <span class="smalldate">{{ widget.item.forecast[0].date }}</span><br />
-                                <i class="icon-cloud-sun-1 weekdayweathericon"></i><br />
+                                <i class="{{codeToIcon(widget.item.forecast[0].code)}} weekdayweathericon"></i><br />
                                 <i class="icon-up-open"></i>{{widget.item.forecast[0].high}}º<br />
                                 <i class="icon-down-open"></i>{{widget.item.forecast[0].low}}º<br />
                                 {{widget.item.forecast[0].text}}
@@ -94,7 +84,7 @@
                             <div class="daycol">
                                 {{ widget.item.forecast[1].day }}<br />
                                 <span class="smalldate">{{ widget.item.forecast[1].date }}</span><br />
-                                <i class="icon-cloud-sun-inv weekdayweathericon"></i><br />
+                                <i class="{{codeToIcon(widget.item.forecast[1].code)}} weekdayweathericon"></i><br />
                                 <i class="icon-up-open"></i>{{widget.item.forecast[1].high}}º<br />
                                 <i class="icon-down-open"></i>{{widget.item.forecast[1].low}}º<br />
                                 {{widget.item.forecast[1].text}}
@@ -102,7 +92,7 @@
                             <div class="daycol">
                                 {{ widget.item.forecast[2].day }}<br />
                                 <span class="smalldate">{{ widget.item.forecast[2].date }}</span><br />
-                                <i class="icon-windy weekdayweathericon"></i><br />
+                                <i class="{{codeToIcon(widget.item.forecast[2].code)}} weekdayweathericon"></i><br />
                                 <i class="icon-up-open"></i>{{widget.item.forecast[2].high}}º<br />
                                 <i class="icon-down-open"></i>{{widget.item.forecast[2].low}}º<br />
                                 {{widget.item.forecast[2].text}}
@@ -110,7 +100,7 @@
                             <div class="daycol">
                                 {{ widget.item.forecast[3].day }}<br />
                                 <span class="smalldate">{{ widget.item.forecast[3].date }}</span><br />
-                                <i class="icon-hail weekdayweatheh.query.results.placeericon"></i><br />
+                                <i class="{{codeToIcon(widget.item.forecast[3].code)}} weekdayweatheh.query.results.placeericon"></i><br />
                                 <i class="icon-up-open"></i>{{widget.item.forecast[3].high}}º<br />
                                 <i class="icon-down-open"></i>{{widget.item.forecast[3].low}}º<br />
                                 {{widget.item.forecast[3].text}}
@@ -118,7 +108,7 @@
                             <div class="daycol">
                                 {{ widget.item.forecast[4].day }}<br />
                                 <span class="smalldate">{{ widget.item.forecast[4].date }}</span><br />
-                                <i class="icon-rain-1 weekdayweathericon"></i><br />
+                                <i class="{{codeToIcon(widget.item.forecast[4].code)}} weekdayweathericon"></i><br />
                                 <i class="icon-up-open"></i>{{widget.item.forecast[4].high}}º<br />
                                 <i class="icon-down-open"></i>{{widget.item.forecast[4].low}}º<br />
                                 {{widget.item.forecast[4].text}}
@@ -127,6 +117,37 @@
                         </div>
                     </div>
                 </div>
+
+           
+            <!--Because of the ::after selector, in order to set the right background image and make it look right inside
+                of the widget, the style element had with all the properties for .maincage had to be defined here. Simply
+                plugging in the "style="" attribute with the correct background:url results in the image not correctly
+                rendered behind the shading
+            -->
+            <style>
+              #cage{{$index}}::after {
+                content: "";
+                background:url("{{codeToImage(widget.item.condition.code)}}");
+                background-size:cover;
+                opacity: 1;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                position: absolute;
+                z-index: -1;
+                opacity: 0.54;
+                background-size: 133%;
+                background-position-x: -87px;*/  
+            }
+
+            </style>
+           <!-- End of style tag-->
+
+
+
+
+
             </div>
 
         </div>
@@ -137,6 +158,7 @@
         
         <!--<script type="text/javascript" src="js/jquery-2.1.4.js"></script>-->
         <script type="text/javascript" src="js/angular.js"></script>
+        <script type="text/javascript" src="js/angular-animate.js"></script>
         <script type="text/javascript" src="js/custom.js"></script>
 
 
