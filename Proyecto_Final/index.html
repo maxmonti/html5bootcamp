@@ -19,11 +19,20 @@
 
     <div ng-app="weatherApp">
 
-        <div class="container boot">
+        <div class="container boot"  ng-controller="MainCtrl">
             <div class="row">
                 <div class="col-md-12">
                       <div class="input-group" id="adv-search">
-                          <input type="text" class="form-control" placeholder="Search for city in Argentina"/>
+
+
+                          <input list="cityList" ng-model="SelectedCity" ng-change="updateQuery(SelectedCity)" type="text" class="form-control" placeholder="Search for city in Argentina"/>
+
+                          <datalist id="cityList">
+                              <option value="{{ city_query.name.concat(', ' + city_query.admin1.content) }}">
+                          </datalist>
+
+
+
                           <div class="input-group-btn">
                               <div class="btn-group" role="group">
                                   <div class="dropdown dropdown-lg">
@@ -31,31 +40,29 @@
                                       Advanced search 
 
                                       </button>
-                                      <div class="dropdown-menu dropdown-menu-right" role="menu">
+
+
+                                      <div ng-controller="AdvSearch" class="dropdown-menu dropdown-menu-right" role="menu">
                                           <form class="form-horizontal" role="form">
                                             <div class="form-group">
-                                              <label for="filter">Filter by</label>
-                                              <select class="form-control">
-                                                  <option value="0" selected>All Snippets</option>
-                                                  <option value="1">Featured</option>
-                                                  <option value="2">Most popular</option>
-                                                  <option value="3">Top rated</option>
-                                                  <option value="4">Most commented</option>
+                                              <label for="filter">Provinces</label>
+                                              <select class="form-control" ng-options="province as province.name  for province in provinces" ng-change="listOfCities(Provinces.woeid)" ng-model="Provinces">
                                               </select>
                                             </div>
                                             <div class="form-group">
-                                              <label for="contain">Author</label>
-                                              <input class="form-control" type="text" />
+                                              <label for="contain">Cities</label>
+                                              <select class="form-control" ng-options="city as city.name for city in cities" ng-model="Cities">
+                                              </select>
                                             </div>
-                                            <div class="form-group">
-                                              <label for="contain">Contains the words</label>
-                                              <input class="form-control" type="text" />
-                                            </div>
-                                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                            
+                                            <button ng-click="addAWidget(Cities.woeid)" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                                           </form>
                                       </div>
+
+
+
                                   </div>
-                                  <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                  <button ng-click="addWidget(SelectedCity)" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"  aria-hidden="true"></span></button>
                               </div>
                           </div>
                       </div>
@@ -63,50 +70,32 @@
             </div>
         </div>
 
-
-
-
-
-
-
-
-
-
-
-    
-
-        <div ng-controller="AdvSearch">        
-           <select ng-options="province as province.name for province in provinces" ng-change="listOfCities(Provinces.woeid)" ng-model="Provinces">
-           </select>
-           <select ng-options="city as city.name for city in cities" ng-model="Cities">
-           </select>
-
-           <button name="add-widget-btn-adv" ng-click="addWidget(Cities.woeid)">Add weather widget from dropdown</button>
-
-        </div> 
-
-
-
-
-        <div id="adder" ng-controller="MainCtrl">
-            
-    		<input list="cityList" ng-model="SelectedCity" ng-change="updateQuery(SelectedCity)" placeholder="Seach for City in Argentina"/>
+        <!--<div id="adder" ng-controller="MainCtrl">
+       	    <input list="cityList" ng-model="SelectedCity" ng-change="updateQuery(SelectedCity)" placeholder="Seach for City in Argentina"/>
     		<datalist id="cityList">
     			<option value="{{ city_query.name  + ', '  + city_query.admin1.content }}">
     		</datalist>
-
-
             <button name="add-widget-btn" ng-click="addWidget(SelectedCity)">Add weather widget</button>
-       
+        </div>-->
+
+            <!-- Begin ADV SEARCH CONTROLLER -->
+            
+            <!--<div ng-controller="AdvSearch">        
+                   <select ng-options="province as province.name  for province in provinces" ng-change="listOfCities(Provinces.woeid)" ng-model="Provinces">
+                   </select>
+                   <select ng-options="city as city.name for city in cities" ng-model="Cities">
+                   </select>
+
+                   <button name="add-widget-btn-adv" ng-click="addAWidget(Cities.woeid)">Add weather widget from dropdown</button>
+
+            </div> -->
+            <!-- End ADV SEARCH CONTROLLER -->
+
+        <br>
+        <br>
 
 
-        </div>
-
-
- 
-
-
-        <div ng-controller="WidgetsList">
+        <div ng-controller="WidgetsList" style="margin: 0 auto;">
 
             <div ng-mouseover="removebutton=true" ng-mouseleave="removebutton=false" id="cage{{$index}}" class="maincage commonwidth themecolor" ng-repeat="widget in widgets track by $index" >
                 <div class="bgimagecage commonwidth">
@@ -211,22 +200,15 @@
         </div>
 
 
+
+
     </div>
 
-        
         <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
         <script type="text/javascript" src="js/bootstrap.js"></script>
         <script type="text/javascript" src="js/angular.js"></script>
         <script type="text/javascript" src="js/angular-animate.js"></script>
         <script type="text/javascript" src="js/custom.js"></script>
-
-
-
-
-
-
-
-
 
 </body>
 </html>

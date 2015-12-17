@@ -30,7 +30,7 @@ weatherApp.factory('$localstorage', ['$window', function($window) {
 
 /*
   We use a separate service that's injected into both controllers that make use of the movie 
-  model (MoviesCtrl and ListMovies) so that both have access to the list of movies
+  model (MainCtrl and AdvSearch) so that both have the ability to add new widgets
   We also use this to wrap around the localstorage functions
 */
 weatherApp.factory('widgetsService', function($localstorage){
@@ -43,10 +43,6 @@ weatherApp.factory('widgetsService', function($localstorage){
     var widgets = $localstorage.getObject("widgets-storage")
 
   }
-    
-  
-
-  console.log(widgets);
 
   //Adding empty movie at the end
   widgets.add = function(weatherItem){
@@ -74,7 +70,7 @@ weatherApp.controller('AdvSearch', function ($scope,$http,widgetsService){
       url: 'https://query.yahooapis.com/v1/public/yql?q=select * from geo.states where place="argentina"&format=json&env=store://datatables.org/alltableswithkeys'
       })
       .success(function (data, status, headers, config) {
-        console.log(data);
+    
         $scope.provinces = data.query.results.place;
 
       })
@@ -89,7 +85,7 @@ weatherApp.controller('AdvSearch', function ($scope,$http,widgetsService){
         url: 'https://query.yahooapis.com/v1/public/yql?q=select * from geo.places.descendants where ancestor_woeid=' + provinceid + ' and placetype="Town"&format=json&env=store://datatables.org/alltableswithkeys'
         })
         .success(function (data, status, headers, config) {
-          console.log(data);
+      
           $scope.cities= data.query.results.place;
 
         })
@@ -99,7 +95,7 @@ weatherApp.controller('AdvSearch', function ($scope,$http,widgetsService){
     }
 
 
-    $scope.addWidget = function(val){
+    $scope.addAWidget = function(val){
 
       $http({
         method: 'GET',  
@@ -107,7 +103,7 @@ weatherApp.controller('AdvSearch', function ($scope,$http,widgetsService){
         })
         .success(function (data, status, headers, config) {
           
-          console.log(data.query.results.channel);
+     
           widgetsService.add(data.query.results.channel);
           
 
@@ -129,14 +125,14 @@ weatherApp.controller('MainCtrl', ['$scope', '$http', 'widgetsService',function 
 
   $scope.updateQuery = function(val) {
 		
-		//Log for testing
-		console.log(val);
+	
+	
 		$http({
 		  method: 'GET',  
 			url: 'https://query.yahooapis.com/v1/public/yql?q=select * from geo.places(0,2) where text="' + val + '" and country.code="AR" and placeTypeName.content="Town"&format=json&env=store://datatables.org/alltableswithkeys'
 		  })
 		  .success(function (data, status, headers, config) {
-			  console.log(data);
+		
 			  $scope.city_query = data.query.results.place;
 
 		  })
@@ -150,11 +146,11 @@ weatherApp.controller('MainCtrl', ['$scope', '$http', 'widgetsService',function 
 
       $http({
         method: 'GET',  
-        url: 'https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="' + val + '") and u="c"&format=json&env=store://datatables.org/alltableswithkeys'
+        url: 'https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places where text="' + val + '" and country.code="AR") and u="c"&format=json&env=store://datatables.org/alltableswithkeys'
         })
         .success(function (data, status, headers, config) {
           
-          console.log(data.query.results.channel);
+      
           widgetsService.add(data.query.results.channel);
           
 

@@ -56,7 +56,7 @@ input {
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: url('../glyphicons-halflings-regular.eot');
-  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  src: url('../font/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../font/glyphicons-halflings-regular.woff2') format('woff2'), url('../font/glyphicons-halflings-regular.woff') format('woff'), url('../font/glyphicons-halflings-regular.ttf') format('truetype'), url('../font/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
   position: relative;
@@ -72,6 +72,9 @@ input {
 
 .glyphicon-search:before {
   content: "\e003";
+}
+.glyphicon-plus:before {
+  content: "\002b";
 }
 .boot * {
   -webkit-box-sizing: border-box;
@@ -430,44 +433,49 @@ label {
 
 
 
- body {
-          padding-top: 50px;
-      }
-      .dropdown.dropdown-lg .dropdown-menu {
-          margin-top: -1px;
-          padding: 6px 20px;
-      }
-      .input-group-btn .btn-group {
-          display: flex !important;
-      }
-      .btn-group .btn {
-          border-radius: 0;
-          margin-left: -1px;
-      }
-      .btn-group .btn:last-child {
-          border-top-right-radius: 4px;
-          border-bottom-right-radius: 4px;
-      }
-      .btn-group .form-horizontal .btn[type="submit"] {
-        border-top-left-radius: 4px;
-        border-bottom-left-radius: 4px;
-      }
-      .form-horizontal .form-group {
-          margin-left: 0;
-          margin-right: 0;
-      }
-      .form-group .form-control:last-child {
-          border-top-left-radius: 4px;
-          border-bottom-left-radius: 4px;
-      }
+body {
+  padding-top: 50px;
+}
+.dropdown.dropdown-lg .dropdown-menu {
+    margin-top: -1px;
+    padding: 6px 20px;
+}
+.input-group-btn .btn-group {
+    display: flex !important;
+}
+.btn-group .btn {
+    border-radius: 0;
+    margin-left: -1px;
+}
+.btn-group .btn:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.btn-group .form-horizontal .btn[type="submit"] {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+.form-group .form-control:last-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
 
-      @media screen and (min-width: 768px) {#adv-search {
-              width: 500px;
-              margin: 0 auto;
-          }
-          .dropdown.dropdown-lg {
-              position: static !important;
-          }
-          .dropdown.dropdown-lg .dropdown-menu {
-              min-width: 500px;
-          }}
+@media screen and (min-width: 768px) {#adv-search {
+        width: 500px;
+        margin: 0 auto;
+    }
+  .dropdown.dropdown-lg {
+    position: static !important;
+  }
+  .dropdown.dropdown-lg .dropdown-menu {
+    min-width: 500px;
+  }
+}
+
+
+
+
