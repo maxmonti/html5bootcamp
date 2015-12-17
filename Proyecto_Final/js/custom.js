@@ -103,7 +103,7 @@ weatherApp.controller('AdvSearch', function ($scope,$http,widgetsService){
 
       $http({
         method: 'GET',  
-        url: 'https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid=' + val + '&format=json&env=store://datatables.org/alltableswithkeys'
+        url: 'https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid=' + val + ' and u="c"&format=json&env=store://datatables.org/alltableswithkeys'
         })
         .success(function (data, status, headers, config) {
           

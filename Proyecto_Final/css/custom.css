@@ -201,7 +201,7 @@ div.dayscellinner{
 }	
 
 div.cityname{
-	width: 100%;
+	width: 90%;
 	text-align: center;
 	font-size: 28px;
 	float: left;
@@ -221,9 +221,27 @@ span.smallFont{
 
 i.icon-cancel{
 	float: right;
-
+	font-size: 34px;
+	color: white;
+	line-height: 0px;
 }
 
-.hidden-delete{
-	opacity: 0;
+
+/*Angular stuff*/
+.fade.ng-enter {
+  transition:0.5s linear all;
+  opacity:0;
+}
+
+/* The finishing CSS styles for the enter animation */
+.fade.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
+.fade.ng-leave {
+  transition:0.5s linear all;
+  opacity:1;
+}
+.fade.ng-leave.ng-leave-active {
+  opacity:0;
 }

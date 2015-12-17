@@ -25,7 +25,7 @@
            <select ng-options="city as city.name for city in cities" ng-model="Cities">
            </select>
 
-           <button ng-mouseover="count = count + 1" ng-init="count=0" name="add-widget-btn-adv" ng-click="addWidget(Cities.woeid)">Add weather widget from dropdown {{count}}</button>
+           <button name="add-widget-btn-adv" ng-click="addWidget(Cities.woeid)">Add weather widget from dropdown</button>
 
         </div> 
 
@@ -52,11 +52,13 @@
 
         <div ng-controller="WidgetsList">
 
-            <div ng-mouseover="showCloseButton($index)" id="cage{{$index}}" class="maincage commonwidth themecolor" ng-repeat="widget in widgets track by $index" >
+            <div ng-mouseover="removebutton=true" ng-mouseleave="removebutton=false" id="cage{{$index}}" class="maincage commonwidth themecolor" ng-repeat="widget in widgets track by $index" >
                 <div class="bgimagecage commonwidth">
                     <div class="locationselect">
-                        <div class="cityname">{{ widget.location.city + ', ' + widget.location.country}}    <i id="delete{{$index}}" ng-click="deleteWidget($index)" class="icon-cancel hidden-delete"></i></div>
-                    </div>
+                        <div class="cityname">{{ widget.location.city + ', ' + widget.location.country}}</div>
+
+                        <i id="delete{{$index}}" ng-if="removebutton" ng-click="deleteWidget($index)" class="icon-cancel fade"></i>
+                </div>
 
                     <span class="tempvalue"><i class="{{codeToIcon(widget.item.condition.code)}} centericon k-widget"></i></span>
                     <span class="date">{{widget.lastBuildDate}}</span>
@@ -156,7 +158,6 @@
     </div>
 
         
-        <!--<script type="text/javascript" src="js/jquery-2.1.4.js"></script>-->
         <script type="text/javascript" src="js/angular.js"></script>
         <script type="text/javascript" src="js/angular-animate.js"></script>
         <script type="text/javascript" src="js/custom.js"></script>
