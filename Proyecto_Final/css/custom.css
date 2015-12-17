@@ -206,6 +206,7 @@ div.cityname{
 	font-size: 28px;
 	float: left;
 	color: white;
+	line-height: 30px;
 	
 
 
@@ -244,4 +245,9 @@ i.icon-cancel{
 }
 .fade.ng-leave.ng-leave-active {
   opacity:0;
+}
+
+.w-widget {
+	line-height: 70px;
+
 }

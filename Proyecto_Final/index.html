@@ -7,6 +7,7 @@
     <title>Weather Widget App</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/mini-bootstrap.css">
     <link rel="stylesheet" href="css/custom.css">
     <link rel="stylesheet" href="css/fontello.css">
     <link rel="stylesheet" href="css/animation.css">
@@ -16,8 +17,63 @@
 
 <body>
 
-
     <div ng-app="weatherApp">
+
+        <div class="container boot">
+            <div class="row">
+                <div class="col-md-12">
+                      <div class="input-group" id="adv-search">
+                          <input type="text" class="form-control" placeholder="Search for city in Argentina"/>
+                          <div class="input-group-btn">
+                              <div class="btn-group" role="group">
+                                  <div class="dropdown dropdown-lg">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span>
+                                      Advanced search 
+
+                                      </button>
+                                      <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                          <form class="form-horizontal" role="form">
+                                            <div class="form-group">
+                                              <label for="filter">Filter by</label>
+                                              <select class="form-control">
+                                                  <option value="0" selected>All Snippets</option>
+                                                  <option value="1">Featured</option>
+                                                  <option value="2">Most popular</option>
+                                                  <option value="3">Top rated</option>
+                                                  <option value="4">Most commented</option>
+                                              </select>
+                                            </div>
+                                            <div class="form-group">
+                                              <label for="contain">Author</label>
+                                              <input class="form-control" type="text" />
+                                            </div>
+                                            <div class="form-group">
+                                              <label for="contain">Contains the words</label>
+                                              <input class="form-control" type="text" />
+                                            </div>
+                                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                          </form>
+                                      </div>
+                                  </div>
+                                  <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                              </div>
+                          </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+    
 
         <div ng-controller="AdvSearch">        
            <select ng-options="province as province.name for province in provinces" ng-change="listOfCities(Provinces.woeid)" ng-model="Provinces">
@@ -158,6 +214,8 @@
     </div>
 
         
+        <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
         <script type="text/javascript" src="js/angular.js"></script>
         <script type="text/javascript" src="js/angular-animate.js"></script>
         <script type="text/javascript" src="js/custom.js"></script>
