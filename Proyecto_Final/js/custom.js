@@ -1,9 +1,6 @@
 
 
-var weatherApp = angular.module('weatherApp', []);
-
-
-angular.module('weatherApp', ['ngAnimate']);
+var weatherApp = angular.module('weatherApp', ['ngAnimate']);
 
 
 /* function that wraps around js' localstorage internal handling
@@ -121,13 +118,6 @@ weatherApp.controller('AdvSearch', function ($scope,$http,widgetsService){
 
     } 
 
-      
-
-
-
-
-      
-
 
 });
 
@@ -188,9 +178,6 @@ weatherApp.controller('WidgetsList', function ($scope,widgetsService) {
 
     document.getElementById("delete" + index).style.opacity = 1;
     //angular.select('#delete' + index).fadeIn(899);
-
-
-
   }
 
   $scope.codeToIcon = function(code){
@@ -331,9 +318,7 @@ weatherApp.controller('WidgetsList', function ($scope,widgetsService) {
           return "images/hg8_bg.jpg"; //not available, code 3200
 
       }
-
-
-
     };
+
 });
 
