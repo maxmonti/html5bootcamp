@@ -35,8 +35,9 @@ angular.module('weatherApp').factory('$localstorage', ['$window', function($wind
 */
 angular.module('weatherApp').factory('widgetsService', function($localstorage){
   
+  var widgets;
   if ($localstorage.get("firstrun",0) == 0 ){
-    var widgets =  [];
+    widgets =  [];
     $localstorage.set("firstrun",1)
     $localstorage.setObject('widgets-storage',widgets)
   }else{
@@ -60,4 +61,4 @@ angular.module('weatherApp').factory('widgetsService', function($localstorage){
 
 });
 
-
+ 
