@@ -8,7 +8,7 @@ angular.module('weatherApp').controller('WidgetsList', function ($scope,widgetsS
   $scope.showCloseButton = function(index){
 
     document.getElementById("delete" + index).style.opacity = 1;
-    //angular.select('#delete' + index).fadeIn(899);
+
   }
 
   $scope.codeToIcon = function(code){
